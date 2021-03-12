@@ -18,9 +18,17 @@ public class PriceGenerator {
 
     @Outgoing("generated-price")
     public Multi<Integer> generate() {
-        return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
-                .onOverflow().drop()
-                .map(tick -> random.nextInt(100));
+        return Multi.createFrom()
+                .ticks()
+                .every(Duration.ofSeconds(5))
+                .onOverflow()
+                .drop()
+                .map(
+                        tick -> {
+                            final int i = random.nextInt(100);
+                            System.out.println("i = " + i);
+                            return i;
+                        });
     }
 
 }
