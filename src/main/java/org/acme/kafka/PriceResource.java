@@ -22,8 +22,8 @@ public class PriceResource {
 
     @GET
     @Path("/stream")
-    @Produces(MediaType.SERVER_SENT_EVENTS)
-    @SseElementType("text/plain")
+    @Produces(MediaType.SERVER_SENT_EVENTS) // denotes that server side events (SSE) will be produced
+    @SseElementType("text/plain") // denotes that the contained data, within this SSE, is just regular text/plain data
     public Publisher<Double> stream() {
         return prices;
     }

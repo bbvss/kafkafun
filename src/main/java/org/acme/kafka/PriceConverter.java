@@ -16,9 +16,12 @@ public class PriceConverter {
 
     private static final double CONVERSION_RATE = 0.88;
 
+    // Consume from the `prices` channel and produce to the `my-data-stream` channel
     @Incoming("prices")
     @Outgoing("my-data-stream")
+    // Send to all subscribers
     @Broadcast
+    // Acknowledge the messages before calling this method.
     @Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
     public double process(int priceInUsd) {
         return priceInUsd * CONVERSION_RATE;
